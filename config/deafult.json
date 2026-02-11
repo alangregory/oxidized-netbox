@@ -1,6 +1,7 @@
 {
     "netbox": {
         "host": "0.0.0.0",
-        "key": "apikey"
+        "key": "apikey",
+        "token": "apitoken"
     }
 }

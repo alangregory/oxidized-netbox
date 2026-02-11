@@ -15,15 +15,24 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "app:dev": "nodemon --exec ts-node src/index.ts",
-    "app:run": "NODE_ENV=production node dist/index.js",
+    "sync:dev": "nodemon --exec ts-node src/services/sync.ts",
+    "sync:run": "NODE_ENV=production node dist/index.js",
     "app:build": "tsc",
     "lint": "eslint . --ext .ts,.tsx"
   },
   "devDependencies": {
+    "@types/config": "^3.3.5",
+    "axios": "^1.13.5",
+    "config": "^4.2.0",
     "eslint": "^9.39.2",
+    "knex": "^3.1.0",
+    "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.55.0"
+    "typescript-eslint": "^8.55.0",
+    "winston": "^3.19.0"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
   }
 }
