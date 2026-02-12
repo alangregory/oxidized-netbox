@@ -21,11 +21,16 @@ class OxidizedSync {
             const manufacturer = device.device_type.manufacturer.name;
             const name = device.name;
             const model = this.parseModel(manufacturer);
-            const ip = device.primary_ip4.address.split("/")[0];
             if (model == null) {
                 logger.logMessage(`failed to parse device model for ${name} ${manufacturer}`, "warn");
                 continue;
             }
+            if (device.primary_ip4 === null) {
+                logger.logMessage(`missing ipv4 management on device ${name}`, "warn");
+                continue;
+            }
+            const ip = device.primary_ip4.address.split("/")[0];
+
             logger.logMessage(`update entry for ${name} ${manufacturer} ${ip}`);
             await DeviceModel.query().insert({
                 name: name,
