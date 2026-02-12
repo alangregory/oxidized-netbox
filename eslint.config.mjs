@@ -6,11 +6,11 @@ export default defineConfig([
     {
         files: ["src/**/*.ts", "src/**/*.tsx"],
         plugins: {
-            js,
+            //js,
             tseslint
         },
         extends: [
-            "js/recommended",
+            //"js/recommended",
             "tseslint/recommended"
         ],
         rules: {
