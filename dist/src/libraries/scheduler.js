@@ -8,9 +8,10 @@ const OxidizedSync_1 = __importDefault(require("./OxidizedSync"));
 const logger_1 = __importDefault(require("./logger"));
 const logger = logger_1.default.getInstance("scheduler");
 class Scheduler {
-    run() {
+    async run() {
         logger.logMessage('start schduler');
         const oxidizedSync = new OxidizedSync_1.default();
+        await oxidizedSync.sync();
         node_cron_1.default.schedule('*/10 * * * *', async () => {
             logger.logMessage(`run cron task`);
             await oxidizedSync.sync();
