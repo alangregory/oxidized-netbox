@@ -1,6 +1,6 @@
 module.exports = {
     apps: [{
-        name: 'stake-check',
+        name: 'oxidized-netbox',
         script: './dist/src/services/sync.js',
         instances: 1,
         autorestart: true,
