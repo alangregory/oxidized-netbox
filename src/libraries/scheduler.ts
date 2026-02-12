@@ -7,7 +7,7 @@ class Scheduler {
     public run() {
         logger.logMessage('start schduler');
         const oxidizedSync = new OxidizedSync();
-        cron.schedule('* * * * *', async () => {
+        cron.schedule('*/10 * * * *', async () => {
             logger.logMessage(`run cron task`);
             await oxidizedSync.sync();
         });
