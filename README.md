@@ -9,3 +9,6 @@ npm install --omit=dev
 ```bash
 npx knex migrate:latest
 ```
+- setup with pm2
+```bash
+```

@@ -1,21 +1,24 @@
-import Logger from "./logger";
-import NetBoxApi from "./netBoxApi";
-import DeviceModel from "../database/models/deviceModel";
-import OxidizedApi from "./oxidizedApi";
-const logger = Logger.getInstance("oxidized-sync");
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const logger_1 = __importDefault(require("./logger"));
+const netBoxApi_1 = __importDefault(require("./netBoxApi"));
+const deviceModel_1 = __importDefault(require("../database/models/deviceModel"));
+const oxidizedApi_1 = __importDefault(require("./oxidizedApi"));
+const logger = logger_1.default.getInstance("oxidized-sync");
 class OxidizedSync {
-
-    public async sync() {
+    async sync() {
         logger.logMessage("start sync");
-        const api = new NetBoxApi();
-        const oxidizedApi = new OxidizedApi();
+        const api = new netBoxApi_1.default();
+        const oxidizedApi = new oxidizedApi_1.default();
         const devices = await api.getDevices();
         if (devices === null) {
             return false;
         }
         //using basic logic for os detection for now
-        await DeviceModel.query().delete();
+        await deviceModel_1.default.query().delete();
         for (const device of devices.results) {
             logger.logMessage(`check ${device.name}`);
             const manufacturer = device.device_type.manufacturer.name;
@@ -27,7 +30,7 @@ class OxidizedSync {
                 continue;
             }
             logger.logMessage(`update entry for ${name} ${manufacturer} ${ip}`);
-            await DeviceModel.query().insert({
+            await deviceModel_1.default.query().insert({
                 name: name,
                 model: model,
                 ip: ip
@@ -37,14 +40,11 @@ class OxidizedSync {
         logger.logMessage("end sync");
         return true;
     }
-
-    private parseModel(manufacturer: string) {
+    parseModel(manufacturer) {
         if (manufacturer.match(/Mikrotik/)) {
             return "routeros";
         }
         return null;
     }
-
 }
-
-export default OxidizedSync;
+exports.default = OxidizedSync;
