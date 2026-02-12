@@ -1,6 +1,6 @@
-import OxidizedSync from "../libraries/OxidizedSync";
+import Scheduler from "../libraries/scheduler";
 
 (async () => {
-    const oxidizedSync = new OxidizedSync();
-    await oxidizedSync.sync();
+    const scheduler = new Scheduler();
+    scheduler.run();
 })();

@@ -16,10 +16,10 @@ class Logger {
                 new transports.Console({
                     level: "info"
                 }),
-                /*new transports.File({
+                new transports.File({
                     filename: 'logs/app.log',
                     options: { flags: 'w' }
-                })*/
+                })
             ]
         });
     }
