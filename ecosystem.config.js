@@ -1,7 +1,7 @@
 module.exports = {
     apps: [{
         name: 'stake-check',
-        script: './dist/services/sync.js',
+        script: './dist/src/services/sync.js',
         instances: 1,
         autorestart: true,
         watch: false,
